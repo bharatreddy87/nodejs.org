@@ -40,3 +40,20 @@ jobs:
       - name: Install Dependencies
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: npm ci
+      - name:  Build
+        run : npm run build -- --stage dev
+
+      - name: Upload a Build Artifact
+        if: ${{ env.PUSH_EVENT }}
+        uses: actions/upload-artifact@v2
+        with:
+            name: build
+            # do we need to specify any custom path
+            path: .build/build.out                      
+
+      - name : Test
+        run: npm run test
+        continue-on-error: false
+
+      - name: Lint
+        run: npm run lint
