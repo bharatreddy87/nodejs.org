@@ -10,6 +10,7 @@ env:
   ## Sets environment variable
   IS_LOCAL: false
   PUSH_EVENT: ${{ github.event_name == 'push'}}
+  ubl: "ubuntu-latest
 
 permissions:
   id-token: write
@@ -17,7 +18,7 @@ permissions:
   
 jobs:
  Platform-Build:
-    runs-on: ${ubl}
+   runs-on: ${ubl}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -43,12 +44,12 @@ jobs:
       - name:  Build
         run : npm run build -- --stage dev
 
-      - name: Upload a Build Artifact
+      - name: Upload a Build Artifact ${ebl}
         if: ${{ env.PUSH_EVENT }}
         uses: actions/upload-artifact@v2
         with:
             name: build
-            # do we need to specify any custom path
+            # do we need to specify any custom path ${ebl}
             path: .build/build.out                      
 
       - name : Test
