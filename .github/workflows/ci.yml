@@ -19,14 +19,14 @@ permissions:
   
 jobs:
  Platform-Build:
-   runs-on: ${{env.ubl}}
+   runs-on: ubuntu-latest
    steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: npm
-      -  name: Cache node modules
+      -  name: Cache node modules ${{env.ubl}}
          id: cache-nodemodules
          uses: actions/cache@v2
          env:
@@ -39,13 +39,13 @@ jobs:
               ${{ runner.os }}-build-${{ env.cache-name }}-
               ${{ runner.os }}-build-
               ${{ runner.os }}-
-      - name: Install Dependencies
+      - name: Install Dependencies - ${{env.ubl}}
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: npm ci
       - name:  Build
         run : npm run build -- --stage dev
 
-      - name: Upload a Build Artifact ${{ebl}}"
+      - name: Upload a Build Artifact - ${{env.ubl}}
         if: ${{ env.PUSH_EVENT }}
         uses: actions/upload-artifact@v2
         with:
@@ -53,7 +53,7 @@ jobs:
             # do we need to specify any custom path ${ebl}
             path: .build/build.out                      
 
-      - name : Test
+      - name : Test - ${{env.ubl}}
         run: npm run test
         continue-on-error: false
 
