@@ -17,7 +17,7 @@ permissions:
   
 jobs:
  Platform-Build:
-    runs-on: ${{env.dev.ubl}}
+    runs-on: env.${{ubl}}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
