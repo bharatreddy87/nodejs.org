@@ -10,6 +10,7 @@ env:
   ## Sets environment variable
   IS_LOCAL: false
   PUSH_EVENT: ${{ github.event_name == 'push'}}
+  ubl: "ubuntu-latest"
   
 
 permissions:
@@ -18,10 +19,7 @@ permissions:
   
 jobs:
  Platform-Build:
-   env:
-       ubl: "ubuntu-latest"
- 
-   runs-on: ${{ubl}}
+   runs-on: ${{env.ubl}}
    steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
