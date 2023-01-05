@@ -10,7 +10,7 @@ env:
   ## Sets environment variable
   IS_LOCAL: false
   PUSH_EVENT: ${{ github.event_name == 'push'}}
-  ubl: "ubuntu-latest
+  ubl: "ubuntu-latest"
 
 permissions:
   id-token: write
